@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Analytics{% endblock %}
+
+{% block content %}
+<h1>System Analytics</h1>
+
+<section class="stats-overview">
+    <h2>Overall Statistics</h2>
+    <p>Total Users: {{ total_users }}</p>
+    <p>Total Files: {{ total_files }}</p>
+    <p>Total Storage Used: {{ total_storage | filesizeformat }}</p>
+</section>
+
+<section class="active-users">
+    <h2>Most Active Users</h2>
+    <ul>
+    {% for user in active_users %}
+        <li>{{ user.username }} - {{ user.file_count }} files ({{ user.total_size | filesizeformat }})</li>
+    {% endfor %}
+    </ul>
+</section>
+
+<section class="file-stats">
+    <h2>Most Viewed Files</h2>
+    <ul>
+    {% for file in most_viewed_files %}
+        <li>{{ file.filename }} - {{ file.view_count }} views</li>
+    {% endfor %}
+    </ul>
+
+    <h2>Most Downloaded Files</h2>
+    <ul>
+    {% for file in most_downloaded_files %}
+        <li>{{ file.filename }} - {{ file.download_count }} downloads</li>
+    {% endfor %}
+    </ul>
+</section>
+{% endblock %}
